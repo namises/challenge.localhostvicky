@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I'm In</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #000;
+    color: #0f0;
+    font-family: monospace;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .hand {
+    position: relative;
+    width: 220px;
+    height: 300px;
+    margin: auto;
+  }
+
+  /* PALM */
+  .palm {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 160px;
+    height: 120px;
+    transform: translateX(-50%);
+    border: 2px solid #0f0;
+  }
+
+  /* FINGERS */
+  .finger {
+    position: absolute;
+    bottom: 120px;
+    width: 28px;
+    height: 80px;
+    border: 2px solid #0f0;
+  }
+
+  .finger.index { left: 45px; }
+  .finger.ring  { left: 115px; }
+  .finger.pinky { left: 145px; height: 60px; }
+
+  /* MIDDLE FINGER */
+  .finger.middle {
+    left: 80px;
+    height: 40px;
+    animation: flip 2s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  @keyframes flip {
+    0%   { height: 40px; }
+    50%  { height: 160px; }
+    100% { height: 40px; }
+  }
+
+  /* BINARY OVERLAY */
+  .binary {
+    position: absolute;
+    inset: 0;
+    font-size: 10px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .binary span {
+    position: absolute;
+    animation: flicker 1.2s infinite alternate;
+  }
+
+  @keyframes flicker {
+    from { opacity: 0.2; }
+    to { opacity: 0.6; }
+  }
+
+  .text {
+    margin-top: 24px;
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="hand">
+    <div class="binary" id="binary"></div>
+
+    <div class="finger index"></div>
+    <div class="finger middle"></div>
+    <div class="finger ring"></div>
+    <div class="finger pinky"></div>
+
+    <div class="palm"></div>
+  </div>
+
+  <div class="text">I’M IN</div>
+</div>
+
+<script>
+  const binary = document.getElementById("binary");
+
+  for (let i = 0; i < 150; i++) {
+    const span = document.createElement("span");
+    span.textContent = Math.random() > 0.5 ? "1" : "0";
+    span.style.left = Math.random() * 100 + "%";
+    span.style.top = Math.random() * 100 + "%";
+    span.style.animationDelay = Math.random() * 2 + "s";
+    binary.appendChild(span);
+  }
+</script>
+
+</body>
+</html>
